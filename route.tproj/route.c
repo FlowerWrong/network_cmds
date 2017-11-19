@@ -115,7 +115,7 @@ typedef union sockunion *sup;
 int	pid, rtm_addrs, uid;
 int	s;
 int	forcehost, forcenet, doflush, nflag, af, qflag, tflag, keyword();
-int	iflag, verbose, aflen = sizeof (struct sockaddr_in);
+int	iflag, verbose, aflen, batch = sizeof (struct sockaddr_in);
 int	locking, lockrest, debugonly;
 struct	rt_metrics rt_metrics;
 u_long  rtm_inits;
@@ -144,7 +144,7 @@ const char *cp;
     }
     
     (void) fprintf(stderr,
-                   "usage: route [-dnqtv] command [[modifiers] args]\n");
+                   "usage: route [-dnqtvb] command [[modifiers] args]\n");
     exit(EX_USAGE);
     /* NOTREACHED */
 }
@@ -164,7 +164,7 @@ char **argv;
         usage((char *)NULL);
     }
     
-    while ((ch = getopt(argc, argv, "nqdtv")) != -1) {
+    while ((ch = getopt(argc, argv, "nqdtvb")) != -1) {
         switch(ch) {
             case 'n':
                 nflag = 1;
@@ -180,6 +180,9 @@ char **argv;
                 break;
             case 'd':
                 debugonly = 1;
+                break;
+            case 'b':
+                batch = 1;
                 break;
             case '?':
             default:
@@ -204,19 +207,56 @@ char **argv;
     
     setuid(uid);
     
-    if (*argv) {
-        switch (keyword(*argv)) {
-            case K_GET:
-                uid = 0;
-                /* FALLTHROUGH */
-                
-            case K_CHANGE:
-            case K_ADD:
-            case K_DELETE:
-                print_argv(argc, argv);
-                newroute(argc, argv);
-                exit(0);
-                /* NOTREACHED */
+    if (batch) {
+        printf("batch mode\n");
+        char *batch_file = NULL;
+        batch_file = argv[0];
+        char *line = NULL;
+        size_t len = 0;
+        
+        if (batch_file) {
+            if (freopen(batch_file, "r", stdin) == NULL) {
+                fprintf(stderr,
+                        "Cannot open file \"%s\" for reading: %s\n",
+                        batch_file, strerror(errno));
+                return EXIT_FAILURE;
+            }
+        }
+        
+        while (getcmdline(&line, &len, stdin) != -1) {
+            char *largv[100];
+            int largc;
+            
+            largc = makeargs(line, largv, 100);
+            if (largc < 3) {
+                continue;    /* blank line */
+            }
+            
+            switch (keyword(*largv)) {
+                case K_CHANGE:
+                case K_ADD:
+                case K_DELETE:
+                    print_argv(largc, largv);
+                    newroute(largc, largv);
+                    // exit(0);
+                    /* NOTREACHED */
+            }
+        }
+    } else {
+        if (*argv) {
+            switch (keyword(*argv)) {
+                case K_GET:
+                    uid = 0;
+                    /* FALLTHROUGH */
+                    
+                case K_CHANGE:
+                case K_ADD:
+                case K_DELETE:
+                    print_argv(argc, argv);
+                    newroute(argc, argv);
+                    exit(0);
+                    /* NOTREACHED */
+            }
         }
     }
     
@@ -518,12 +558,12 @@ register char **argv;
         errx(EX_NOPERM, "must be root to alter routing table");
     }
     cmd = argv[0];
-    if (*cmd != 'g') {
+    if (*cmd != 'g') { // route get?
         shutdown(s, 0); /* Don't want to read back our messages */
     }
     
     while (--argc > 0) {
-        if (**(++argv)== '-') {
+        if (**(++argv) == '-') {
             switch (key = keyword(1 + *argv)) {
                 case K_LINK:
                     af = AF_LINK;
@@ -730,9 +770,9 @@ register char **argv;
         } else {
             break;
         }
-        
     }
-    if (*cmd == 'g') {
+    
+    if (*cmd == 'g') { // route get?
         exit(0);
     }
     

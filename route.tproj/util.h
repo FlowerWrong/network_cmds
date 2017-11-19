@@ -12,6 +12,8 @@
 #include <stdlib.h>
 #include <string.h>
 
+void print_argv(int argc, char **argv);
+
 ssize_t getcmdline(char **linep, size_t *lenp, FILE *in);
 
 int makeargs(char *line, char *argv[], int maxargs);

@@ -213,6 +213,7 @@ char **argv;
             case K_CHANGE:
             case K_ADD:
             case K_DELETE:
+                print_argv(argc, argv);
                 newroute(argc, argv);
                 exit(0);
                 /* NOTREACHED */

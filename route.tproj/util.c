@@ -7,6 +7,17 @@
 
 #include "util.h"
 
+void print_argv(int argc, char **argv) {
+    printf("print argc and argv start ---------\n");
+    int i;
+    printf("argc %d \n", argc);
+    for(i=0; i < argc-1; i++) {
+        printf("%s\n", argv[i]);
+    }
+    printf("print argc and argv end -----------\n");
+}
+
+
 int cmdlineno;
 /* Like glibc getline but handle continuation lines and comments */
 ssize_t getcmdline(char **linep, size_t *lenp, FILE *in)

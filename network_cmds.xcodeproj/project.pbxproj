@@ -294,6 +294,7 @@
 		72E650A9107BF2F000AAF325 /* af_link.c in Sources */ = {isa = PBXBuildFile; fileRef = 72E650A4107BF2F000AAF325 /* af_link.c */; };
 		72E650AA107BF2F000AAF325 /* ifbridge.c in Sources */ = {isa = PBXBuildFile; fileRef = 72E650A5107BF2F000AAF325 /* ifbridge.c */; };
 		72E650AB107BF2F000AAF325 /* ifclone.c in Sources */ = {isa = PBXBuildFile; fileRef = 72E650A6107BF2F000AAF325 /* ifclone.c */; };
+		CEEDB2EF1FC116B500242A52 /* util.c in Sources */ = {isa = PBXBuildFile; fileRef = CEEDB2EE1FC116B500242A52 /* util.c */; };
 		E01AB0901368880F008C66FF /* libutil.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = E01AB08F1368880F008C66FF /* libutil.dylib */; };
 		F940359D1E2FF5A900283EB1 /* iffake.c in Sources */ = {isa = PBXBuildFile; fileRef = F940359C1E2FF58500283EB1 /* iffake.c */; };
 		F97F1E041E9C3FC8002355FF /* nexus.c in Sources */ = {isa = PBXBuildFile; fileRef = F97F1E031E9C3FBC002355FF /* nexus.c */; };
@@ -1397,6 +1398,8 @@
 		72E650A4107BF2F000AAF325 /* af_link.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = af_link.c; sourceTree = "<group>"; };
 		72E650A5107BF2F000AAF325 /* ifbridge.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = ifbridge.c; sourceTree = "<group>"; };
 		72E650A6107BF2F000AAF325 /* ifclone.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = ifclone.c; sourceTree = "<group>"; };
+		CEEDB2ED1FC116B500242A52 /* util.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = util.h; sourceTree = "<group>"; };
+		CEEDB2EE1FC116B500242A52 /* util.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = util.c; sourceTree = "<group>"; };
 		E01AB08F1368880F008C66FF /* libutil.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libutil.dylib; path = $SDKROOT/usr/lib/libutil.dylib; sourceTree = "<group>"; };
 		F940359C1E2FF58500283EB1 /* iffake.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = iffake.c; sourceTree = "<group>"; };
 		F97F1E031E9C3FBC002355FF /* nexus.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = nexus.c; sourceTree = "<group>"; };
@@ -2069,6 +2072,8 @@
 				726120B50EE86F7200AFED1B /* keywords.h */,
 				726120B70EE86F7200AFED1B /* route.8 */,
 				726120B80EE86F7200AFED1B /* route.c */,
+				CEEDB2ED1FC116B500242A52 /* util.h */,
+				CEEDB2EE1FC116B500242A52 /* util.c */,
 			);
 			path = route.tproj;
 			sourceTree = "<group>";
@@ -3145,6 +3150,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				7216D2F20EE89CD600AE70E4 /* route.c in Sources */,
+				CEEDB2EF1FC116B500242A52 /* util.c in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

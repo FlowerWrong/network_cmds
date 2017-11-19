@@ -91,6 +91,8 @@ __unused static const char copyright[] =
 #include <unistd.h>
 #include <ifaddrs.h>
 
+#include "util.h"
+
 struct keytab {
 	char	*kt_cp;
 	int	kt_i;

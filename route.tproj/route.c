@@ -236,9 +236,7 @@ char **argv;
                 case K_CHANGE:
                 case K_ADD:
                 case K_DELETE:
-                    print_argv(largc, largv);
                     newroute(largc, largv);
-                    // exit(0);
                     /* NOTREACHED */
             }
         }
@@ -252,16 +250,13 @@ char **argv;
                 case K_CHANGE:
                 case K_ADD:
                 case K_DELETE:
-                    print_argv(argc, argv);
                     newroute(argc, argv);
                     exit(0);
                     /* NOTREACHED */
             }
         }
+        usage(*argv);
     }
-    
-    usage(*argv);
-    /* NOTREACHED */
 }
 
 
@@ -553,6 +548,7 @@ register char **argv;
     int ishost = 0, ret, attempts, oerrno, flags = RTF_STATIC;
     int key;
     struct hostent *hp = 0;
+    rtm_addrs = 0;
     
     if (uid) {
         errx(EX_NOPERM, "must be root to alter routing table");

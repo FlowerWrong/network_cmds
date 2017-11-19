@@ -3807,6 +3807,7 @@
 				INSTALL_MODE_FLAG = 0555;
 				INSTALL_PATH = /sbin;
 				PRODUCT_NAME = route;
+				SDKROOT = macosx;
 			};
 			name = "Ignore Me";
 		};
@@ -4367,6 +4368,7 @@
 				INSTALL_MODE_FLAG = 0555;
 				INSTALL_PATH = /sbin;
 				PRODUCT_NAME = route;
+				SDKROOT = macosx;
 			};
 			name = Debug;
 		};
@@ -4382,6 +4384,7 @@
 				INSTALL_MODE_FLAG = 0555;
 				INSTALL_PATH = /sbin;
 				PRODUCT_NAME = route;
+				SDKROOT = macosx;
 			};
 			name = Release;
 		};
